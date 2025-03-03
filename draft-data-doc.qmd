@@ -1,3 +1,13 @@
 ---
 title: "Draft: Data Documentation"
 ---
+
+
+@StormEventsDatabase
+
+
+The National Centers for Environmental Information(NCEI) data in this report relating to storm events was collected from the National Weather Service(NWS), who receives their information from a variety of sources. The data was recorded to users to search for various types of recorded storms throughout recent history. The data contains records of storm events from all over the country dating from the beginning of January 1950 until November of 2024. For each year, there is a separate file dedicated to either storm details, storm fatalities, or storm locations. Only tornadoes were recorded for the first five years of data, thunderstorm wind and hail were added for the following 41 years, and all other event types were added from that point until now.
+
+The various sources that contribute data to the NWS include management officials from the county, state and federal levels, local law enforcement officials, skywarn spotters, damage surveys, newspaper clipping services, the general public, and the insurance industry. Once the data is collected by the NWS, it is validated, entered, and sent to the NCEI approximately 75 days after each data month. Although it is validated by the NWS, they acknowledge that the NWS does not guarantee the accuracy or validity of information due to resource constraints.
+
+The data files are structured in csv format, with each type of file(details,locations,fatalities) having its own comprehensible data dictionary given in the zip file. On the NOAA website it is stated that the files can be viewed in Excel and other spreadsheet applications.
