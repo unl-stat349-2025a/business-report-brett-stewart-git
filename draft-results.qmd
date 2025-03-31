@@ -2,3 +2,10 @@
 title: "Draft: Results"
 ---
 
+One primary finding of the data analysis revealed that in the years of 2021 to 2024, the ratio of tornados that occured in ocean bordering states compared to all U.S. tornados remained rather steady.
+
+![Graph illustrating changes (or lack thereof) of the ratio of tornados in ocean-bordering states compared to the national total.](/Users/bstewart14@unl.edu/Downloads/Sharknado/Screenshot 2025-03-31 at 1.31.png)
+
+It is seen in the graph that the ratios stay pretty similar throughout the four year span. In increasing chronological order, the percentages are 31.39, 49.24, 32.63, and 31.53. 36.2 percent is the mean ratio and this helps us realize that 63.8 percent of tornados definitely do not have shark carrying capabilities, as they take place in states where sharks are not present.
+
+I've split the tornado data into 3 different coasts, but cannot figure how to analyze the probability of coastal tornados moving inward from coastal areas or outward towards coastal areas. Maybe incorporating longitude and latitude somehow. I also need to incorporate the shark data into my analysis although I'm not sure which features are more important to look at (Abundance,population density, size, location).
