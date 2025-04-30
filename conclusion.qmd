@@ -1,0 +1,9 @@
+---
+title: "Conclusion"
+format: html
+editor: visual
+---
+
+After analyzing data from reputable sources on both shark populations and storm events, findings suggest that tornados with the ability to transport sharks inland are extremely unlikely to occur, and nothing to be concerned about. The set of conditions needed for sharks to be lifted from the ocean and transported inland is virtually nonexistent based on historical data.
+
+On the business side of things, the financial risk posed by a Sharknado is negligible. There is no need to adjust any actuarial models, insurance premiums, or any related things of that nature due to the threat of shark infested tornados. Although media we consume can create fear within in our minds, this analysis is good example that our business should continue to function based on reality and data.
