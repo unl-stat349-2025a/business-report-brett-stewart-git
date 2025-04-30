@@ -1,0 +1,9 @@
+---
+title: "Introduction"
+format: html
+editor: visual
+---
+
+The 2013 sci-fi film Sharknado has introduced the potential issue of bizarre storms, specifically tornados that have the capability to transport sharks from oceanic waters to mainland. As an insurance company, the probability of such an occurrence should be properly calculated or estimated. A big reason why we want to know the probability of such an occurrence is due to an unforeseen possible increase in insurance payouts related to such a catastrophic event. Being financially prepared for those payouts is a necessity for our business to continue to thrive.
+
+Our research question we will explore is how serious a Sharknado threat is to our bottom line. Our approach to answering this question involves analysis using data gathered from reputable government agencies on both shark populations and storm events.
