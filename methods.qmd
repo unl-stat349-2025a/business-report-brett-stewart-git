@@ -1,0 +1,9 @@
+---
+title: "Methods"
+format: html
+editor: visual
+---
+
+Using the sf package in R, historical tornado data near U.S. coastline was mapped geographically. Specifically, it was mapped using latitudal and longitudal start and end points for individual tornados in order to see the frequency of tornados that started at the coast and moved inland as would be necessary in a hypothetical sharknado scenario. The data relating to tornados was collected from the NOAA [@StormEv] and more info can be found in the data documentation section.
+
+The methods for discovering the secondary findings of the analysis involved using statistical calculations in R in order to find the ratio of tornados in ocean-bordering states compared to the total for all United States tornados during a recent four year span. By splitting the states of each of the three ocean-bordering coasts into three different dataframes, we can calculate ratios for each individual year over the span of 2021 through 2024.
