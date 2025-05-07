@@ -9,19 +9,17 @@ book:
     left: "Copyright 2025, Brett Stewart"
   chapters:
     - index.qmd
-    - intro.qmd
+    - draft-exec-summary.qmd
     - introduction.qmd
-    - draft-intro-conclusions.qmd
     - methods.qmd
-    - draft-results.qmd
+    - Results.qmd
     - conclusion.qmd
-    - summary.qmd
     - references.qmd
   appendices:
     - draft-data-doc.qmd
     - draft-results.qmd
     - draft-intro-conclusions.qmd
-    - draft-exec-summary.qmd
+    - Sharknader.R
 
 bibliography: references.bib
 
