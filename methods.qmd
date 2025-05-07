@@ -2,8 +2,13 @@
 title: "Methods"
 format: html
 editor: visual
+bibliography: references.bib
 ---
 
-Using the sf package in R, historical tornado data near U.S. coastline was mapped geographically. Specifically, it was mapped using latitudal and longitudal start and end points for individual tornados in order to see the frequency of tornados that started at the coast and moved inland as would be necessary in a hypothetical sharknado scenario. The data relating to tornados was collected from the NOAA [@StormEv] and more info can be found in the data documentation section.
+Using the `sf` package in R [@pebesma2025] , historical tornado data near U.S. coastline was mapped geographically. Specifically, it was mapped using latitudinal and longitudinal start and end points for individual tornadoes in order to see the frequency of tornadoes that started at the coast and moved inland as would be necessary in a hypothetical Sharknado occurrence. The data relating to tornadoes was collected from the NOAA \[@StormEv\] and more information about the data can be found in the data documentation section.
 
-The methods for discovering the secondary findings of the analysis involved using statistical calculations in R in order to find the ratio of tornados in ocean-bordering states compared to the total for all United States tornados during a recent four year span. By splitting the states of each of the three ocean-bordering coasts into three different dataframes, we can calculate ratios for each individual year over the span of 2021 through 2024.
+The approach for the primary analysis of the data began with assembling weather data from the NOAA for the five most recent full years(2020-2024). After merging those five years of data together, filtering the data was necessary to ignore everything except for tornadoes and waterspout events that had geographic coordinates attached to the them. a shape file containing U.S. counties that border a coast was used as a reference to see if tornadoes began and/or ended in a coastal county. It can be found on the United States Geological Survey website[@ShapefileCoastalZone].
+
+Each tornado within the data set was classified as either moving inward or moving toward the coast based on its movement from start to finish using conditional code statements. Using this, we were able to more accurately assess the risk of a Sharknado.
+
+To build upon the primary analysis, a secondary analysis was performed. A variable was created called 'sharkworthy'. Since it seems generally acceptable that a tornado would need to be rated at minimum a 2 on the Enhanced Fujita(EF) Scale in order to pick up relatively heavy objects and transport them a significant distance, a tornado would be declared 'sharkworthy' if it met all three of the following conditioins. If it started in a coastal county, had a magnitude of 2 or higher, and moved inland. These 'sharkworthy' tornadoes were mapped using `sf` package and the `ggplot2` package.
