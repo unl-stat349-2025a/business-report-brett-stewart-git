@@ -1,0 +1,125 @@
+library(ggplot2)
+library(readr)
+library(readxl)
+library(sf)
+library(dplyr)
+library(tidyverse)
+library(stringr)
+
+tornado_2024_dataframe <- read_csv("StormEvents_details-ftp_v1.0_d2024_c20250317.csv")
+tornado_2023_dataframe <- read_csv("StormEvents_details-ftp_v1.0_d2023_c20250317.csv")
+tornado_2022_dataframe <- read_csv("StormEvents_details-ftp_v1.0_d2022_c20241121.csv")
+tornado_2021_dataframe <- read_csv("StormEvents_details-ftp_v1.0_d2021_c20240716.csv")
+tornado_2020_dataframe <- read_csv("StormEvents_details-ftp_v1.0_d2020_c20240620.csv")
+
+tornado2020_2024df <- bind_rows(tornado_2024_dataframe, 
+                                         tornado_2023_dataframe, 
+                                         tornado_2022_dataframe, 
+                                         tornado_2021_dataframe, 
+                                         tornado_2020_dataframe) %>%
+  filter(EVENT_TYPE %in% c("Tornado", 'Waterspout'))
+
+
+
+tornado2020_2024df_clean <- tornado2020_2024df %>%
+  filter(!is.na(BEGIN_LAT) & !is.na(BEGIN_LON) & !is.na(END_LAT) & !is.na(END_LON))
+
+tornado2020_2024df_clean %>%
+  count(EVENT_TYPE)
+
+tornado_begin_sf <- st_as_sf(tornado2020_2024df_clean, coords = c("BEGIN_LON", "BEGIN_LAT"), crs = 4326)
+tornado_end_sf <- st_as_sf(tornado2020_2024df_clean, coords = c("END_LON", "END_LAT"), crs = 4326)
+
+coastal_dataframe <- read_sf("CZMP_counties_2009.shp")
+
+#print(st_crs(coastal_dataframe))
+#print(st_crs(tornado_begin_sf))
+
+
+coastal_dataframe <- st_transform(coastal_dataframe, crs = 4326)
+
+st_crs(coastal_dataframe)
+st_crs(tornado_begin_sf)
+
+tornado2020_2024df_clean$starts_in_coast <- lengths(st_within(tornado_begin_sf, coastal_dataframe)) > 0
+
+tornado2020_2024df_clean$moves_inward <- ifelse(
+  tornado2020_2024df_clean$starts_in_coast &
+    (abs(tornado2020_2024df_clean$END_LON) > abs(tornado2020_2024df_clean$BEGIN_LON)),  
+  TRUE, FALSE
+)
+
+tornado2020_2024df_clean$moves_toward_coast <- ifelse(
+  !tornado2020_2024df_clean$starts_in_coast &
+    (abs(tornado2020_2024df_clean$END_LON) < abs(tornado2020_2024df_clean$BEGIN_LON)),
+  TRUE, FALSE
+)
+
+inwardProbability <- mean(tornado2020_2024df_clean$moves_inward, na.rm = TRUE)
+towardCoastProbability <- mean(tornado2020_2024df_clean$moves_toward_coast, na.rm = TRUE)
+
+#table(tornado2020_2024df_clean)
+inwardProbability
+towardCoastProbability
+
+#this means that for all tornados that started in a coastal county, 2.83 percent moved further inland. 
+
+#This means that tornados that started outside of a coastal county, about 66.7 percent of them moved toward the coast.
+
+table(tornado2020_2024df_clean$starts_in_coast)
+
+
+#Secondary analysis 
+# Classify sharkworthy tornadoes based on your existing logic
+tornado2020_2024df_clean <- tornado2020_2024df_clean %>%
+  mutate(sharkworthy = ifelse(
+    starts_in_coast & moves_inward & TOR_F_SCALE %in% c("EF2", "EF3", "EF4", "EF5"), TRUE, FALSE
+  ))
+
+#sharkworthy tornadoes
+sharkworthy_sf <- st_as_sf(
+  tornado2020_2024df_clean %>% filter(sharkworthy),
+  coords = c("BEGIN_LON", "BEGIN_LAT"),
+  crs = 4326
+)
+
+ggplot() +
+  geom_sf(data = coastal_dataframe, fill = "lightblue", color = "black", alpha = 0.4) +
+  geom_sf(data = sharkworthy_sf, color = "red", size = 2, alpha = 0.7) +
+  coord_sf(
+    xlim = c(-125, -65),  
+    ylim = c(25, 50),     
+    expand = FALSE
+  ) +
+  theme_minimal() +
+  labs(
+    title = "Sharkworthy Tornadoes (Strength >= EF2 and from Coastal Counties Moving Inland)",
+    subtitle = paste("Total:", nrow(sharkworthy_sf)),
+    caption = "2020–2024"
+  )
+
+sharkworthy <- tornado2020_2024df_clean %>%
+  filter(sharkworthy)
+
+ggplot() +
+  geom_sf(data = coastal_dataframe, fill = "lightblue", color = "black", alpha = 0.4) +
+  
+  
+  geom_point(data = sharkworthy,
+             aes(x = BEGIN_LON, y = BEGIN_LAT),
+             color = "green", size = 2.5, alpha = 0.8) +
+  
+  
+  geom_point(data = sharkworthy,
+             aes(x = END_LON, y = END_LAT),
+             color = "red", size = 2.5, alpha = 0.8) +
+  
+  coord_sf(xlim = c(-125, -65), ylim = c(22, 50), expand = FALSE) +
+  theme_minimal() +
+  labs(
+    title = "Sharkworthy Tornadoes: Start (Green) and End (Red) Points",
+    subtitle = paste("Total:",nrow(sharkworthy)),
+    caption = "2020–2024 EF2+ Tornadoes from Coastal Counties Moving Inland"
+  )
+
+
