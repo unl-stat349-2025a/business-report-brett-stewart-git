@@ -1,12 +1,12 @@
 ---
-title: "Draft: Executive Summary"
+title: "Executive Summary"
 ---
 
 The purpose of this report is to assess the probability of a shark infested tornado impacting the financial outlook of our insurance company. Findings of why it is not a realistic threat are included within the report, along with evidence leading to those findings.
 
 Sharknados are extremely unlikely to occur because of the lack of historical weather data involving tornados that start in coastal areas and move inward toward land, as seen in the popular 2013 sci-fi film. Maps illustrating this data are included within the report.
 
-Sharknados are also extremely unlikely to occur due to the majority of tornados not having the ability to lift and transport sharks a significant distance. Data related to the Fujita (F) scale and the capabilities of each type of tornado on that scale are included.
+Sharknados are also extremely unlikely to occur due to the extreme lack of tornados near coastal areas that are of bare minimum severity on the Enhanced Fujita scale to lift and transport sharks a significant distance.
 
 The analysis shows that Sharknados are virtually impossible based on historical data. The conditions required for such events simply don't exist. From a business perspective, the financial risk is negligible. 
 
